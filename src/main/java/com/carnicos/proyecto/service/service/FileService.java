@@ -44,7 +44,7 @@ public class FileService {
     //guardar un archivo
 
     public GenericResponse save(File obj) {
-        String fileName = (repo.findById(obj.getId())).orElse(new File()).getFileName();
+        /*String fileName = (repo.findById(obj.getId())).orElse(new File()).getFileName();
 
         String originalFilename = obj.getFile().getOriginalFilename();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -52,7 +52,7 @@ public class FileService {
         fileName = storageService.storeFile(obj.getFile(), fileName);
 
         obj.setFileName(fileName);
-        obj.setExtension(extension);
+        obj.setExtension(extension);*/
 
         return new GenericResponse(TIPO_DATA, RPTA_OK,OPERACION_CORRECTA,repo.save(obj));
     }

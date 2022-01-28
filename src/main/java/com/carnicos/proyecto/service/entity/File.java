@@ -20,12 +20,14 @@ public class File {
     private String estado;
 
     private boolean eliminado;
+    
+    private String idurl;
 
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private MultipartFile file;
 
-    @Transient
+    
     private String urlFile;
 
     public File() {
@@ -104,4 +106,14 @@ public class File {
     public String getCompleteFileName() {
         return fileName + extension;
     }
+
+	public String getIdurl() {
+		return idurl;
+	}
+
+	public void setIdurl(String idurl) {
+		this.idurl = idurl;
+	}
+    
+    
 }
