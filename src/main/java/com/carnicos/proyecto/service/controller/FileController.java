@@ -62,8 +62,9 @@ public class FileController {
     }*/
     
     @PostMapping("/upload")
-    public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile,@ModelAttribute File obj)throws IOException {
+    public ResponseEntity<?> upload(@ModelAttribute File obj)throws IOException {
         
+    	MultipartFile multipartFile = obj.getFile();
     	System.out.println(obj.getNombre());
     	BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
         if(bi == null){
