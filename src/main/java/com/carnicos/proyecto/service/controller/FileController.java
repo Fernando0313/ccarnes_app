@@ -62,13 +62,13 @@ public class FileController {
     }*/
     
     @PostMapping("/upload")
-    public ResponseEntity<?> upload(@ModelAttribute File obj)throws IOException {
+    public GenericResponse upload(@ModelAttribute File obj)throws IOException {
         
     	MultipartFile multipartFile = obj.getFile();
     	System.out.println(obj.getNombre());
     	BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
         if(bi == null){
-            return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
+            //return new ResponseEntity(new Mensaje("imagen no válida"), HttpStatus.BAD_REQUEST);
         }
         Map result = imgService.upload(multipartFile);
         File archivoFile = new File();
@@ -77,16 +77,14 @@ public class FileController {
         archivoFile.setNombre(obj.getNombre());
         archivoFile.setIdurl(result.get("public_id").toString());
         archivoFile.setFileName(result.get("original_filename").toString());
-        service.save(archivoFile);
-        System.out.println(obj.getUrlFile());
-        System.out.println(result.get("url").toString());
-        System.out.println(result.get("original_filename").toString());
+         return service.save(archivoFile);
+     
         /*Imagen imagen =
                 new Imagen((String)result.get("original_filename"),
                         (String)result.get("url"),
                         (String)result.get("public_id"));
         imagenService.save(imagen);*/
-        return new ResponseEntity(new Mensaje("imagen subida"), HttpStatus.OK);
+        //return new ResponseEntity(new Mensaje("imagen subida"), HttpStatus.OK);
     }
     
     
